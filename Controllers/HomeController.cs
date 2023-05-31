@@ -78,18 +78,18 @@ namespace BarcodeGenerator.Controllers
 
                 barcodeNum = first12Digit.ToString() + last11Digit.ToString() + digit24.ToString();
 
-                GeneratedBarcode finalBarcode = IronBarCode.BarcodeWriter.CreateBarcode(barcodeNum, BarcodeWriterEncoding.ITF);
-                finalBarcode.ResizeTo(500, 120);
-                finalBarcode.AddBarcodeValueTextBelowBarcode();
-                finalBarcode.ChangeBarCodeColor(System.Drawing.Color.Black);
-                finalBarcode.SetMargins(10);
+                GeneratedBarcode Barcode = IronBarCode.BarcodeWriter.CreateBarcode(barcodeNum, BarcodeWriterEncoding.ITF);
+                Barcode.ResizeTo(500, 120);
+                Barcode.AddBarcodeValueTextBelowBarcode();
+                Barcode.ChangeBarCodeColor(System.Drawing.Color.Black);
+                Barcode.SetMargins(10);
                 string path = Path.Combine(_environment.WebRootPath, "GeneratedBarcode");
                 if (!Directory.Exists(path))
                 {
                     Directory.CreateDirectory(path);
                 }
                 string filePath = Path.Combine(_environment.WebRootPath, "GeneratedBarcode/barcode.png");
-                finalBarcode.SaveAsPng(filePath);
+                Barcode.SaveAsPng(filePath);
                 string fileName = Path.GetFileName(filePath);
                 string imageUrl = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}" + "/GeneratedBarcode/" + fileName;
                 ViewBag.QrCodeUri = imageUrl;
