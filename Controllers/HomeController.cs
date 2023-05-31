@@ -47,7 +47,7 @@ namespace BarcodeGenerator.Controllers
             int digit23 = generateBarcode.EnerjiDuzeltmeArti;
             try
             {
-                if (radioButton == "Saniye")
+                if (radioButton == "Second")
                 {
                     digit19_20_21 = generateBarcode.Sure;
                     if (generateBarcode.Cap2 != null)
@@ -82,7 +82,7 @@ namespace BarcodeGenerator.Controllers
                     string imageUrl = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}" + "/GeneratedBarcode/" + fileName;
                     ViewBag.QrCodeUri = imageUrl;
                 }
-                else if (radioButton == "Dakika")
+                else if (radioButton == "Minute")
                 {
                     digit19_20_21 = generateBarcode.ModifyNumber(generateBarcode.Sure);
                     if (generateBarcode.Cap2 != null)

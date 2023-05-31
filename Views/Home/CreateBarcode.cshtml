@@ -6,6 +6,12 @@
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript">
+    function onDirencChange() {
+        var direnc = document.getElementById("direnc");
+        if (/\./.test(direnc.value) === false) {
+            direnc.value = `${direnc.value}.00`;
+        }
+    }
     function validateForm() {
         var cap1 = document.getElementById("SelectCap1");
         var cap2 = document.getElementById("SelectCap2");
@@ -18,7 +24,6 @@
     }
     $(document).ready(function () {
         $('#SelectCap2').val(null);
-        $('#SelectCap1').val(null);
         if ($('input[name=Tip]:checked').val() === "Y_Reduction" || $('input[name=Tip]:checked').val() === "Tapping_Tee") {
             $('#Cap2').show();
         } else {
@@ -68,9 +73,9 @@
                 <div class="form-group">
                     <label asp-for="Sure" class="control-label">Kaynak Süresi</label>
                     <br />
-                    @Html.RadioButton("radioButton", "Saniye", true)
+                    @Html.RadioButton("radioButton", "Second", true)
                     <label for="RadioButton1">Saniye</label>
-                    @Html.RadioButton("radioButton", "Dakika")
+                    @Html.RadioButton("radioButton", "Minute")
                     <label for="RadioButton2">Dakika</label>
                     <br />
                     <input asp-for="Sure" type="number" min="0" max="999" onkeyup="if(parseInt(this.value)>999){ this.value =999; return false; }" class="form-control" />
@@ -85,7 +90,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Direnc" class="control-label">Ürün Direnci</label>
-                    <input asp-for="Direnc" type="number" min="0.01" step=".01" onchange="if (/\./.test(this.value) === false) {this.value = `${this.value}.00`;}" class="form-control" />
+                    <input asp-for="Direnc" id="direnc" type="number" min="0.01" step=".01" onchange="onDirencChange()" class="form-control" />
                     <span asp-validation-for="Direnc" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -96,7 +101,6 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    @*@Html.Label("Select:", "", new { @class = "col-md-6 control-label" })*@
                     <div class="col-md-12">
                         @Html.RadioButtonFor(model => model.Tip, Tip.Raytrans) @Html.Label("Raytrans") <br />
                         @Html.RadioButtonFor(model => model.Tip, Tip.JTDW_Tapping_Tee) @Html.Label("JTDW tapping tee") <br />
@@ -114,7 +118,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="Rezistans" class="control-label">Rezistans Düzeltme</label>
-                <input asp-for="Rezistans" width="15px" type="number" min="0" max="9" onkeyup="if(parseInt(this.value)>9){ this.value =9; return false; }" class="form-control" />
+                <input asp-for="Rezistans" width="15" type="number" min="0" max="9" onkeyup="if(parseInt(this.value)>9){ this.value =9; return false; }" class="form-control" />
                 <span asp-validation-for="Rezistans" class="text-danger"></span>
             </div>
             <div class="form-group">
