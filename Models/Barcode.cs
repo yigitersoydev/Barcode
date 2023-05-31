@@ -26,24 +26,24 @@ namespace BarcodeGenerator.Models
             int d = (d1 * 31) + d2;
             return d;
         }
-        public int ModifyNumber(int number)
+        public int ModifyTime(int number)
         {
-            int firstDigit = 9;
-            int secondDigit;
+            int constDigit = 9;
+            int first2Digit, firstDigit;
             int modifiedNumber;
             if (number > 99)
             {
-                secondDigit = (number / 10);
-                modifiedNumber = (firstDigit * 100) + secondDigit;
+                first2Digit = (number / 10);
+                modifiedNumber = (constDigit * 100) + first2Digit;
                 return modifiedNumber;
             }
             else
             {
-                secondDigit = number / 10;
+                firstDigit = number / 10;
                 int remainingDigits = number % 10;
                 if (remainingDigits != 0)
-                    modifiedNumber = (firstDigit * 100) + (secondDigit * 10) + remainingDigits;
-                else{ modifiedNumber = (firstDigit * 100) + number; }
+                    modifiedNumber = (constDigit * 100) + (firstDigit * 10) + remainingDigits;
+                else{ modifiedNumber = (constDigit * 100) + number; }
                 return modifiedNumber;
             }
 
@@ -200,7 +200,7 @@ namespace BarcodeGenerator.Models
     public enum SogumaSuresi : byte
     {
         [Display(Name = "5")]
-        Bes,
+        Beş,
         [Display(Name = "10")]
         On,
         [Display(Name = "15")]
