@@ -5,7 +5,7 @@ using System.Xml.Linq;
 
 namespace BarcodeGenerator.Models
 {
-    public class GenerateBarcodeModel
+    public class Barcode
     {
         public Tip Tip { get; set; }
         public Cap1 Cap1 { get; set; }

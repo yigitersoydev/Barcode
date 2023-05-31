@@ -1,4 +1,4 @@
-﻿@model BarcodeGenerator.Models.GenerateBarcodeModel
+﻿@model BarcodeGenerator.Models.Barcode
 
 @{
     ViewData["Title"] = "CreateBarcode";
@@ -6,11 +6,13 @@
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript">
+    function onKeyupVoltaj() {
+        var voltaj = document.getElementById("voltaj");
+    }
     function onDirencChange() {
         var direnc = document.getElementById("direnc");
-        if (/\./.test(direnc.value) === false) {
-            direnc.value = `${direnc.value}.00`;
-        }
+        if (/\./.test(direnc.value) === false) { direnc.value = `${direnc.value}.00`; }
+        else if (/\.\d$/.test(direnc.value)) { direnc.value = parseFloat(direnc.value).toFixed(2); }
     }
     function validateForm() {
         var cap1 = document.getElementById("SelectCap1");
@@ -67,7 +69,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Voltaj" class="control-label">Kaynak Voltajı</label>
-                    <input asp-for="Voltaj" type="number" min="0" max="99" onkeyup="if(parseInt(this.value)>99){ this.value =99; return false; }" class="form-control" />
+                    <input asp-for="Voltaj" type="number" min="0" max="99" onkeyup="if (parseInt(this.value) > 99) { this.value = Math.floor(this.value / 10); return false; }" class="form-control" />
                     <span asp-validation-for="Voltaj" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -78,7 +80,7 @@
                     @Html.RadioButton("radioButton", "Minute")
                     <label for="RadioButton2">Dakika</label>
                     <br />
-                    <input asp-for="Sure" type="number" min="0" max="999" onkeyup="if(parseInt(this.value)>999){ this.value =999; return false; }" class="form-control" />
+                    <input asp-for="Sure" type="number" min="0" max="999" onkeyup="if(parseInt(this.value)>999){ this.value =Math.floor(this.value / 10); return false; }" class="form-control" />
                     <span asp-validation-for="Sure" class="text-danger"></span>
                 </div>
             </div>
