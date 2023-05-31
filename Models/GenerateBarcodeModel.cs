@@ -8,7 +8,6 @@ namespace BarcodeGenerator.Models
     public class GenerateBarcodeModel
     {
         public Tip Tip { get; set; }
-        public int MyProperty { get; set; }
         public Cap1 Cap1 { get; set; }
         public Cap2? Cap2 { get; set; }
         public byte Voltaj { get; set; }
