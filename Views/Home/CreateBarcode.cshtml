@@ -1,5 +1,4 @@
 ﻿@model BarcodeGenerator.Models.Barcode
-
 @{
     ViewData["Title"] = "CreateBarcode";
 }
@@ -142,6 +141,9 @@
 
             <div class="form-group">
                 <img src="@ViewBag.QrCodeUri" class="img-thumbnail" />
+            </div>
+            <div class="form-group">
+                <input type="submit" action="Print" value="YAZDIR" class="btn btn-primary" />
             </div>
         </div>
     </form>

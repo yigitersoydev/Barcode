@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.Drawing.Printing;
 
 namespace BarcodeGenerator.Controllers
 {
@@ -98,6 +100,29 @@ namespace BarcodeGenerator.Controllers
             {
                 throw;
             }
+            return View();
+        }
+        public ActionResult Print()
+        {
+            string path = Path.Combine(_environment.WebRootPath, "GeneratedBarcode");
+            string filePath = Path.Combine(_environment.WebRootPath, "GeneratedBarcode/barcode.png");
+            string fileName = Path.GetFileName(filePath);
+            string imageUrl = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}" + "/GeneratedBarcode/" + fileName;
+            if (!System.IO.File.Exists(filePath))
+            {
+                ViewBag.Message = "Dosya Bulunamadı.";
+                return View();
+            }
+            PrintDocument pd = new PrintDocument();
+            pd.PrintPage += (sender, args) =>
+            {
+                System.Drawing.Image image = System.Drawing.Image.FromFile(filePath);
+                args.Graphics.DrawImage(image, args.MarginBounds);
+                args.HasMorePages = false;
+                image.Dispose();
+            };
+            pd.Print();
+            ViewBag.Message = "Yazdırma işlemi tamamlandı.";
             return View();
         }
     }
