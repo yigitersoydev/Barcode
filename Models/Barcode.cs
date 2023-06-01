@@ -17,6 +17,8 @@ namespace BarcodeGenerator.Models
         public byte Rezistans { get; set; }
         public byte EnerjiDuzeltmeEksi { get; set; }
         public byte EnerjiDuzeltmeArti { get; set; }
+        public string? DownloadUrl { get; set; }
+        public string? ViewUrl { get; set; }
     }
 
     public enum Tip : byte
