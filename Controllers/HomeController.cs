@@ -1,7 +1,7 @@
 ﻿using BarcodeGenerator.Models;
 using IronBarCode;
-//using iTextSharp.text;
-//using iTextSharp.text.pdf;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -32,9 +32,30 @@ namespace BarcodeGenerator.Controllers
         {
             return View();
         }
+        public ActionResult GetPdfStream()
+        {
+            if (ViewBag.PdfStream != null)
+            {
+                MemoryStream pdfStream = ViewBag.PdfStream;
+                return File(pdfStream, "application/pdf");
+            }
+
+            return new EmptyResult();
+        }
+
+        public IActionResult Index()
+        {
+            string pdfFilePath = Path.Combine(_environment.ContentRootPath, "wwwroot/GeneratedBarcode/barcode.pdf");
+            byte[] pdfBytes = System.IO.File.ReadAllBytes(pdfFilePath);
+            string base64String = System.Convert.ToBase64String(pdfBytes);
+            ViewBag.PdfBase64String = base64String;
+
+            return View();
+        }
         [HttpPost]
         public IActionResult CreateBarcode(BarcodeGenerator.Models.Barcode barcode, string radioButton)
         {
+           
             long first12Digit, last11Digit;
             string barcodeNum, all23Digits = "";
             int digit1_2 = Convert.ToByte(barcode.Tip);
@@ -103,60 +124,74 @@ namespace BarcodeGenerator.Controllers
                 throw;
             }
 
-            return View("CreateBarcode");
+            return View();
         }
-        public ActionResult PrintFile()
+
+
+        public ActionResult ConvertToPdf()
         {
             try
             {
-                string filePath = Path.Combine(_environment.WebRootPath, "GeneratedBarcode/barcode.png");
-                string fileName = Path.GetFileName(filePath);
-                string imageUrl = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}" + "/GeneratedBarcode/" + fileName;
-                PrintDocument printDocument = new PrintDocument();
-                printDocument.PrintPage += (sender, e) =>
+                string pngFilePath = Path.Combine(_environment.WebRootPath, "GeneratedBarcode/barcode.png");
+                string pdfFilePath = Path.Combine(_environment.ContentRootPath, "wwwroot/GeneratedBarcode/barcode.pdf");
+
+                using (var document = new Document())
                 {
-                    System.Drawing.Image image = System.Drawing.Image.FromFile(filePath);
-                    e.Graphics.DrawImageUnscaled(image, e.MarginBounds.Left, e.MarginBounds.Top);
-                    image.Dispose();
-                    e.HasMorePages = false;
-                };
-                printDocument.Print();
+                    using (var fs = new FileStream(pdfFilePath, FileMode.Create))
+                    {
+                        var writer = PdfWriter.GetInstance(document, fs);
+
+                        document.Open();
+                        document.NewPage();
+
+                        var image = iTextSharp.text.Image.GetInstance(pngFilePath);
+                        image.ScaleToFit(300f, 300f);
+                        image.SetDpi(600, 600);
+                        document.Add(image);
+                        document.Close();
+                    }
+                }
+                byte[] fileBytes = System.IO.File.ReadAllBytes(pdfFilePath);
+                Response.Headers.Add("Content-Disposition", "inline; filename=barcode.pdf");
+                Response.Headers.Add("Content-Type", "application/pdf");
+                Response.Headers.Add("Content-Length", fileBytes.Length.ToString());
+
+                return File(fileBytes, "application/pdf");
             }
             catch (Exception)
             {
                 throw;
             }
-            return View("CreateBarcode");
         }
+        public ActionResult PrintFile()
+        {
+            return RedirectToAction("ConvertToPdf");
+        }
+
         //public ActionResult PrintFile()
         //{
-        //    string folderPath = Path.Combine(_environment.WebRootPath, "GeneratedBarcode");
-        //    string filePath = Path.Combine(_environment.WebRootPath, "GeneratedBarcode/barcode.png");
-        //    string fileName = Path.GetFileName(filePath);
-        //    string imageUrl = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}" + "/GeneratedBarcode/" + fileName;
-        //    using (MemoryStream ms = new MemoryStream())
+        //    try
         //    {
-        //        using (Document document = new Document())
+        //        string filePath = Path.Combine(_environment.WebRootPath, "GeneratedBarcode/barcode.png");
+        //        string fileName = Path.GetFileName(filePath);
+        //        string imageUrl = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}" + "/GeneratedBarcode/" + fileName;
+        //        PrintDocument printDocument = new PrintDocument();
+        //        printDocument.PrintPage += (sender, e) =>
         //        {
-        //            PdfWriter writer = PdfWriter.GetInstance(document, ms);
-        //            document.Open();
-        //            iTextSharp.text.Image image = iTextSharp.text.Image.GetInstance(filePath);
-        //            //float targetWidth = 450;
-        //            //float targetHeight = 140;
-        //            float scaleFactor = 0.7f; // Ölçek faktörü
-        //            float targetWidth = image.Width * scaleFactor;
-        //            float targetHeight = image.Height * scaleFactor;
-        //            image.ScaleAbsolute(targetWidth, targetHeight);
-        //            document.Add(image);
-        //            document.Close();
-        //        }
-        //        Response.Clear();
-        //        Response.ContentType = "application/pdf";
-        //        Response.Headers.Add("Content-Disposition", "inline; filename=barcode.pdf");
-        //        Response.Body.Write(ms.GetBuffer());
-        //        Response.Body.Flush();
+        //            System.Drawing.Image image = System.Drawing.Image.FromFile(filePath);
+        //            e.Graphics.DrawImageUnscaled(image, e.MarginBounds.Left, e.MarginBounds.Top);
+        //            image.Dispose();
+        //            e.HasMorePages = false;
+        //        };
+        //        printDocument.Print();
+
+        //        byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
+        //        return File(fileBytes, "application/pdf", "barcode.pdf");
         //    }
-        //    return new EmptyResult();
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
         //}
     }
 }

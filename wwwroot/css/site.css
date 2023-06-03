@@ -12,7 +12,51 @@ html {
   position: relative;
   min-height: 100%;
 }
-
+.footer {
+    background-color: #231f20 !important;
+}
+.footer .container {
+    color:white !important;
+    display:flex;
+    justify-content:center;
+}
+    .footer .container a {
+        color: #ec6d00 !important;
+    }
+#form {
+    margin-bottom:10px;
+}
+.row {
+    background-color: rgb(255 255 255 / 50%);
+    box-shadow: 0 0 70px 20px rgb(255 255 255);
+}
+form {
+    background-color: rgb(255 255 255);
+    border-radius: 10px;
+}
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #ec6d00;
+}
+.col-md-3 {
+    float: left;
+    margin: 5px 5px 5px 0;
+    width: 32%;
+    padding: 15px;
+}
+
+.form-group {
+    margin: 10px 0;
+}
+
+.col-md-12 {
+    float: left;
+}
+.navbar {
+    background-color: #231f20 !important;
+    justify-content:center;
+    display:grid;
+}
+.text-dark{
+    color:white !important;
 }

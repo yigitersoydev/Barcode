@@ -10,6 +10,7 @@
     <PackageReference Include="BarCode" Version="2023.6.1" />
     <PackageReference Include="iTextSharp" Version="5.5.13.3" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
+    <PackageReference Include="Neodynamic.SDK.WebClientPrint" Version="6.0.0" />
   </ItemGroup>
 
 </Project>
