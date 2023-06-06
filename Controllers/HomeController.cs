@@ -32,16 +32,6 @@ namespace BarcodeGenerator.Controllers
         {
             return View();
         }
-        public ActionResult GetPdfStream()
-        {
-            if (ViewBag.PdfStream != null)
-            {
-                MemoryStream pdfStream = ViewBag.PdfStream;
-                return File(pdfStream, "application/pdf");
-            }
-
-            return new EmptyResult();
-        }
 
         public IActionResult Index()
         {
@@ -131,8 +121,7 @@ namespace BarcodeGenerator.Controllers
             return View();
         }
 
-
-        public ActionResult ConvertToPdf()
+        public ActionResult PrintFile()
         {
             try
             {
@@ -166,10 +155,6 @@ namespace BarcodeGenerator.Controllers
             {
                 throw;
             }
-        }
-        public ActionResult PrintFile()
-        {
-            return RedirectToAction("ConvertToPdf");
         }
 
         //public ActionResult PrintFile()
