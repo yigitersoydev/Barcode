@@ -45,6 +45,10 @@ namespace BarcodeGenerator.Controllers
 
         public IActionResult Index()
         {
+            //string textpath = Path.Combine(_environment.ContentRootPath, "wwwroot/sample.txt");
+            //string[] texts = System.IO.File.ReadAllLines(textpath);
+            //ViewBag.Data = texts;
+
             string pdfFilePath = Path.Combine(_environment.ContentRootPath, "wwwroot/GeneratedBarcode/barcode.pdf");
             byte[] pdfBytes = System.IO.File.ReadAllBytes(pdfFilePath);
             string base64String = System.Convert.ToBase64String(pdfBytes);
