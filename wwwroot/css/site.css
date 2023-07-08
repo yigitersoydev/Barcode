@@ -12,6 +12,10 @@ html {
   position: relative;
   min-height: 100%;
 }
+a:hover{
+    text-decoration:underline;
+    text-underline-offset: 5px;
+}
 .footer {
     background-color: #231f20 !important;
 }
@@ -47,10 +51,13 @@ body {
 
 .form-group {
     margin: 10px 0;
+    display:flex;
+    text-align:center;
 }
 
 .col-md-12 {
     float: left;
+    margin-top:2%;
 }
 .navbar {
     background-color: #231f20 !important;
@@ -59,4 +66,16 @@ body {
 }
 .text-dark{
     color:white !important;
+}
+.form-control {
+    width:75%;
+    margin:auto;
+}
+span{
+    display:flex;
+    justify-content:center;
+}
+label {
+    width:24%;
+/*    line-height:38px;*/
 }

@@ -1,23 +1,17 @@
 ﻿@{
     ViewBag.Title = "Barcode";
 }
-
-<h2>En son üretilen barkod</h2>
-
-@*<div>
-    @foreach (string text in ViewBag.Data)
-    {
-        <h4>@text</h4>
-    }
-</div>*@
-
-@if (!string.IsNullOrEmpty(ViewBag.PdfBase64String))
-{
-    <embed src="data:application/pdf;base64,@ViewBag.PdfBase64String" width="1000" height="800" type="application/pdf">
-}
-else
-{
-    <p>PDF dosyası bulunamadı.</p>
-}
+<div style="text-align:center">
+    <h2>Last Generated Barcode</h2>
 
 
+    @if (!string.IsNullOrEmpty(ViewBag.PdfBase64String))
+        {
+        <embed src="data:application/pdf;base64,@ViewBag.PdfBase64String" width="1000" height="800" type="application/pdf">
+        }
+        else
+        {
+        <p>PDF dosyası bulunamadı.</p>
+        }
+
+</div>

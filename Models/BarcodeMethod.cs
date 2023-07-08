@@ -16,6 +16,45 @@ namespace BarcodeGenerator.Models
             int d = (d1 * 31) + d2;
             return d;
         }
+        public string CalcManufacturer(string str)
+        {
+            string firstChar = str.Substring(0, 1);
+            string secondChar = str.Substring(1, 1);
+            string[] arrS = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "+", "blank", "black" };
+            string[] arrV = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29" };
+            int firstCharVal = Array.IndexOf(arrS, firstChar);
+            string firstCharVals = arrV[firstCharVal];
+            int secondCharVal = Array.IndexOf(arrS, secondChar);
+            string secondCharVals = arrV[secondCharVal];
+            string modified = firstCharVals + secondCharVals;
+
+            return modified;
+
+        }
+        public int ModifyTimeInSec(int number)
+        {
+            int constDigit = 9;
+            int firstDigit;
+            int modifiedNumber;
+            if (number < 900)
+            {
+                return number;
+            }
+            else if (number >= 900)
+            {
+                modifiedNumber = Convert.ToInt16(Math.Round(number / 60.0));
+                firstDigit = modifiedNumber / 10;
+                int remainingDigits = modifiedNumber % 10;
+                if (remainingDigits != 0)
+                    modifiedNumber = (constDigit * 100) + (firstDigit * 10) + remainingDigits;
+                else { modifiedNumber = (constDigit * 100) + modifiedNumber; }
+                return modifiedNumber;
+            }
+            else {
+                return number;
+            }
+
+        }
         public int ModifyTime(int number)
         {
             int constDigit = 9;

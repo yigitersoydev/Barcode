@@ -1,3 +1,7 @@
+using BarcodeGenerator.Controllers;
+using System;
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 namespace BarcodeGenerator
 {
     public class Program
@@ -8,7 +12,12 @@ namespace BarcodeGenerator
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+            {
+                //options.Cookie.Name = "Fırat.Auth";
+                options.LoginPath = "/Login/Index";
+                options.AccessDeniedPath = "/Login/Index";
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -24,6 +33,7 @@ namespace BarcodeGenerator
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BarcodeGenerator.styles.css" asp-append-version="true" />
+    <link rel="shortcut icon" href="~/fav.ico" type="image/x-icon">
 </head>
 <body>
     <header>
@@ -20,14 +21,20 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="CreateBarcode">Generate Barcode</a>
+                        </li>
+                        <li style="color:white;margin:auto">/</li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Barcode Preview</a>
+                        </li>
+                        <li style="color:white;margin:auto">/</li>
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">About</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" target="_blank" asp-action="Index">PDF Preview</a>
-                        </li>
+
                     </ul>
                 </div>
-               
+
             </div>
         </nav>
     </header>
