@@ -12,12 +12,12 @@ namespace BarcodeGenerator
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
-            {
-                //options.Cookie.Name = "Fırat.Auth";
-                options.LoginPath = "/Login/Index";
-                options.AccessDeniedPath = "/Login/Index";
-            });
+            //builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+            //{
+            //    //options.Cookie.Name = "Fırat.Auth";
+            //    options.LoginPath = "/Login/Index";
+            //    options.AccessDeniedPath = "/Login/Index";
+            //});
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

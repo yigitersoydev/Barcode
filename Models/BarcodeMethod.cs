@@ -10,7 +10,7 @@ namespace BarcodeGenerator.Models
 	{
         public int CalculateDiameter(int D1, int D2)
         {
-            int[] arrD = { 020, 025, 032, 040, 050, 063, 075, 090, 110, 125, 140, 160, 180, 200, 225, 250, 315 };
+            int[] arrD = { 020, 025, 032, 040, 050, 063, 075, 090, 110, 125, 140, 160, 180, 200, 225, 250, 280, 315, 355, 400, 450, 500, 560, 630, 710 };
             int d1 = Array.IndexOf(arrD, D1);
             int d2 = Array.IndexOf(arrD, D2);
             int d = (d1 * 31) + d2;

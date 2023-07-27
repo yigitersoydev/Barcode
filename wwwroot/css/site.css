@@ -27,11 +27,11 @@ a:hover{
     .footer .container a {
         color: #ec6d00 !important;
     }
-#form {
+/*#form {
     margin-bottom:10px;
-}
+}*/
 .row {
-    background-color: rgb(255 255 255 / 50%);
+    background-color: rgb(255 255 255 / 70%);
     box-shadow: 0 0 70px 20px rgb(255 255 255);
 }
 form {
@@ -79,3 +79,9 @@ label {
     width:24%;
 /*    line-height:38px;*/
 }
+.barcode {
+    font-family: 'Interleaved 2of5 Regular';
+}
+/*.img-thumbnail{
+    height:100px;
+}*/

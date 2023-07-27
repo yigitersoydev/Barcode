@@ -7,11 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\GeneratedBarcode\barcode.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BarCode" Version="2023.7.2" />
     <PackageReference Include="iTextSharp" Version="5.5.13.3" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
     <PackageReference Include="Neodynamic.SDK.WebClientPrint" Version="6.0.0" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
     <PackageReference Include="Syncfusion.Pdf.AspNet.Mvc5" Version="22.1.37" />
+    <PackageReference Include="Zen.Barcode.Core" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,5 +25,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Login\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\GeneratedBarcode\barcode.png" />
   </ItemGroup>
 </Project>

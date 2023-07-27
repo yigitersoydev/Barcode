@@ -1,4 +1,5 @@
 ﻿using IronBarCode;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
@@ -7,6 +8,7 @@ namespace BarcodeGenerator.Models
 {
     public partial class Barcode
     {
+        [Required(ErrorMessage = "This field is required!")]
         public Tip Tip { get; set; }
         [Required(ErrorMessage = "This field is required!")]
         [MaxLength(2,ErrorMessage = "A maximum of 2 characters must be entered!")]
@@ -18,8 +20,7 @@ namespace BarcodeGenerator.Models
         [Required(ErrorMessage = "This field is required!")]
         public byte Voltaj { get; set; }
         [Required(ErrorMessage = "This field is required!")]
-        [Range(0.01,9.99, ErrorMessage = "The value must be between 0,01 - 9,99!")]
-        public float Direnc { get; set; }
+        public string Direnc { get; set; }
         [Required(ErrorMessage = "This field is required!")]
         [Range(3,5940,ErrorMessage = "The value must be between 3 and 5940!")]
         public int Sure { get; set; }
@@ -90,8 +91,24 @@ namespace BarcodeGenerator.Models
         İkiYüzYirmiBeş = 225,
         [Display(Name = "250")]
         İkiYüzElli = 250,
+        [Display(Name = "280")]
+        İkiYüzSeksen = 280,
         [Display(Name = "315")]
-        ÜçYüzOnBeş = 315
+        ÜçYüzOnBeş = 315,
+        [Display(Name = "355")]
+        ÜçYüzElliBeş = 355,
+        [Display(Name = "400")]
+        DörtYüz = 400,
+        [Display(Name = "450")]
+        DörtYüzElli = 450,
+        [Display(Name = "500")]
+        BeşYüz = 500,
+        [Display(Name = "560")]
+        BeşYüzAltmış = 560,
+        [Display(Name = "630")]
+        AltıYüzOtuz = 630,
+        [Display(Name = "710")]
+        YediYüzOn = 710,
     }
     public enum Cap2
     {
@@ -129,8 +146,24 @@ namespace BarcodeGenerator.Models
         İkiYüzYirmiBeş = 225,
         [Display(Name = "250")]
         İkiYüzElli = 250,
+        [Display(Name = "280")]
+        İkiYüzSeksen = 280,
         [Display(Name = "315")]
-        ÜçYüzOnBeş = 315
+        ÜçYüzOnBeş = 315,
+        [Display(Name = "355")]
+        ÜçYüzElliBeş = 355,
+        [Display(Name = "400")]
+        DörtYüz = 400,
+        [Display(Name = "450")]
+        DörtYüzElli = 450,
+        [Display(Name = "500")]
+        BeşYüz = 500,
+        [Display(Name = "560")]
+        BeşYüzAltmış = 560,
+        [Display(Name = "630")]
+        AltıYüzOtuz = 630,
+        [Display(Name = "710")]
+        YediYüzOn = 710,
     }
     public enum SogumaSuresi : byte
     {
@@ -151,6 +184,6 @@ namespace BarcodeGenerator.Models
         [Display(Name = "75 Minutes")]
         YetmişBeş,
         [Display(Name = "90 Minutes")]
-        Doksan,
+        Doksan
     }
 }
